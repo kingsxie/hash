@@ -1,0 +1,67 @@
+#include <iostream>
+#include <string>
+#include<iterator>
+#include <vector>
+#include <forward_list>
+#include <utility>
+#include <cstdlib>
+#include <time.h>
+using namespace std;
+
+
+class hashtable{
+public:
+    vector<forward_list<int> > v_;
+    
+    int n_;//number of element
+    int code(unsigned int Key){
+        return Key;
+    }
+    size_t h(int code){
+        int prime_num = 13;
+     
+        int result = code % prime_num;
+        return result;
+    }
+    size_t hash(int Key){
+        return h(code(Key));
+    }
+
+    hashtable():v_(12){}
+  
+
+    void insert(int value)
+    {
+        int i = hash(value);
+        v_[i].push_front(value);
+    }
+
+    void displayHash()
+    {
+        for(int i = 0; i< 12; i++)
+        {
+            
+            for(auto x: v_[i])
+            {
+                cout << x << ' ';
+            }
+            cout << endl;
+        }
+    }
+};
+
+
+int main()
+{
+    
+
+   
+    hashtable h2;
+    int v2[] = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    for(int i = 0; i< 11; i++)
+    {
+        h2.insert(v2[i]);
+       
+    }
+    h2.displayHash();
+}
